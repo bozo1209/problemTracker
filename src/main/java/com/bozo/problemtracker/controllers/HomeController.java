@@ -1,5 +1,6 @@
 package com.bozo.problemtracker.controllers;
 
+import com.bozo.problemtracker.enums.NoteStatus;
 import com.bozo.problemtracker.forms.NoteForm;
 import com.bozo.problemtracker.services.MarketService;
 import com.bozo.problemtracker.services.NoteService;
@@ -8,16 +9,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class HomeController {
 
     private NoteService noteService;
     private MarketService marketService;
 
+    private List<String> statusList;
+
     @Autowired
     public HomeController(NoteService noteService, MarketService marketService){
         this.noteService = noteService;
         this.marketService = marketService;
+        statusList = Arrays.asList(NoteStatus.OPEN.name(), NoteStatus.READY.name(), NoteStatus.CLOSED.name(), NoteStatus.REOPEN.name());
     }
 
     @GetMapping(path = "/")
@@ -25,6 +33,7 @@ public class HomeController {
         model.addAttribute("NoteForm", new NoteForm());
         model.addAttribute("noteList", noteService.getNotesForPresentationByUserId(1));
         model.addAttribute("marketNameList", marketService.getMarketNames());
+        model.addAttribute("statusList", statusList);
         return "home.html";
     }
 

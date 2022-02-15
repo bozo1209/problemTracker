@@ -32,7 +32,10 @@
             <div style="display: inline-block;">
                 <label>Status</label>
                 <br>
-                <input id="statusid" type="text" th:field="*{status}">
+<!--                <input id="statusid" type="text" th:field="*{status}">-->
+                <select th:name="status">
+                    <option th:each="status : ${statusList}" th:selected="${status == 'OPEN'}">[[${status}]]</option>
+                </select>
             </div>
             <div style="display: none;">
                 <label>Year</label>
