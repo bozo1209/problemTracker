@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem Tracker</title>
+</head>
+<body>
+<div style="float:right;">users name</div>
+<br>
+<div>
+    <div>
+        <form id="myForm" action="#" th:action="@{/addnote}" th:object="${NoteForm}" method="post">
+<!--        <div id="myForm" th:object="${NoteForm}">-->
+            <div style="display: inline-block;">
+                <label>Market</label>
+                <br>
+<!--                <input id="marketid" type="text" th:field="*{market}">-->
+                <select  th:name="market">
+                    <option th:each="marketName : ${marketNameList}">[[${marketName}]]</option>
+                </select>
+            </div>
+            <div style="display: inline-block;">
+                <label>Outside Number</label>
+                <br>
+                <input id="outsidenumberid" type="text" th:field="*{outsideNumber}">
+            </div>
+            <div style="display: inline-block;">
+                <label>Description</label>
+                <br>
+                <input id="descriptionid" type="text" th:field="*{description}">
+            </div>
+            <div style="display: inline-block;">
+                <label>Status</label>
+                <br>
+                <input id="statusid" type="text" th:field="*{status}">
+            </div>
+            <div style="display: none;">
+                <label>Year</label>
+                <input id="yearid" type="text" th:field="*{year}">
+            </div>
+            <div style="display: none;">
+                <label>Month</label>
+                <input id="monthid" type="text" th:field="*{month}">
+            </div>
+            <div style="display: none;">
+                <label>Day</label>
+                <input id="dayid" type="text" th:field="*{day}">
+            </div>
+            <div style="display: none;">
+                <label>Users</label>
+                <input id="usersid" type="text" th:field="*{users}">
+            </div>
+            <button type="submit">Add</button>
+<!--            <button onclick="add()">Add</button>-->
+<!--        </div>-->
+        </form>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Market</th>
+                <th>OutsideNumber</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Data</th>
+                <th>Number of notes for OutsideNumber</th>
+            </tr>
+            <tr th:each="note : ${noteList}">
+                <td>[[${note.getMarket()}]]</td>
+                <td>[[${note.getOutsideNumber()}]]</td>
+                <td>[[${note.getDescription()}]]</td>
+                <td>[[${note.getStatus()}]]</td>
+                <td>[[${note.getData().toString()}]]</td>
+                <td>[[${note.getCount()}]]</td>
+                <td><button>Edit</button></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    function add(){
+        alert("start");
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData();
+        alert(document.getElementById("marketid").value);
+        alert(document.getElementById("descriptionid").value);
+        formData.append("market", document.getElementById("marketid").value);
+        alert(1);
+        formData.append("outsideNumber", document.getElementById("outsidenumberid").value);
+        formData.append("description", document.getElementById("descriptionid").value);
+        formData.append("status", document.getElementById("statusid").value);
+        formData.append("year", document.getElementById("yearid").value);
+        formData.append("month", document.getElementById("monthid").value);
+        formData.append("day", document.getElementById("dayid").value);
+        formData.append("users", document.getElementById("usersid").value);
+        alert(2);
+<!--        formData.append("NoteForm", f);-->
+        xhr.open( "POST", "/addnote", false);
+<!--        alert(3);-->
+        xhr.send(formData);
+        alert("udało sie?");
+    }
+</script>
+</body>
+</html>
