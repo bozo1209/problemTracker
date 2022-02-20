@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>edit note</title>
+    <script src="/test.js"></script>
+</head>
+<body>
+<div>
+    <form action="#"  th:object="${NoteForm}" method="post">
+        <div style="display: inline-block;">
+            <label>Market</label>
+            <br>
+            <!--                <input id="marketid" type="text" th:field="*{market}">-->
+            <select  th:name="market">
+                <option th:each="marketName : ${marketNameList}" th:selected="${marketName == NoteForm.getMarket()}">[[${marketName}]]</option>
+            </select>
+        </div>
+        <div style="display: inline-block;">
+            <label>Outside Number</label>
+            <br>
+            <input id="outsidenumberid" type="text" th:field="*{outsideNumber}">
+        </div>
+        <div style="display: inline-block;">
+            <label>Description</label>
+            <br>
+            <input id="descriptionid" type="text" th:field="*{description}">
+        </div>
+        <div style="display: inline-block;">
+            <label>Status</label>
+            <br>
+            <!--                <input id="statusid" type="text" th:field="*{status}">-->
+            <select th:name="status">
+                <option th:each="status : ${statusList}" th:selected="${status == NoteForm.getStatus()}">[[${status}]]</option>
+            </select>
+        </div>
+        <div style="display: none;">
+            <label>Year</label>
+            <input id="yearid" type="text" th:field="*{year}">
+        </div>
+        <div style="display: none;">
+            <label>Month</label>
+            <input id="monthid" type="text" th:field="*{month}">
+        </div>
+        <div style="display: none;">
+            <label>Day</label>
+            <input id="dayid" type="text" th:field="*{day}">
+        </div>
+        <div style="display: none;">
+            <label>Users</label>
+            <input id="usersid" type="text" th:field="*{users}">
+        </div>
+        <button type="submit">Save changes</button>
+        <button type="button" th:onclick="closeEdit()">Close without changes</button>
+    </form>
+</div>
+<script>
+
+</script>
+</body>
+</html>

@@ -2,11 +2,13 @@ package com.bozo.problemtracker.models;
 
 import com.bozo.problemtracker.entities.Market;
 import com.bozo.problemtracker.entities.Users;
+import com.bozo.problemtracker.forms.NoteForm;
 
 import java.time.LocalDate;
 
 public class NotePresentation {
 
+    private long id;
     private String market;
     private String outsideNumber;
     private String description;
@@ -15,7 +17,8 @@ public class NotePresentation {
     private String users;
     private Long count;
 
-    public NotePresentation(String market, String outsideNumber, String description, String status, LocalDate data, String users, Long count) {
+    public NotePresentation(long id, String market, String outsideNumber, String description, String status, LocalDate data, String users, Long count) {
+        this.id = id;
         this.market = market;
         this.outsideNumber = outsideNumber;
         this.description = description;
@@ -26,6 +29,14 @@ public class NotePresentation {
     }
 
     public NotePresentation(){}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getMarket() {
         return market;
@@ -81,5 +92,19 @@ public class NotePresentation {
 
     public void setCount(Long count) {
         this.count = count;
+    }
+
+    public NoteForm convertToNoteForm(){
+        NoteForm noteForm = new NoteForm();
+        noteForm.setId(this.getId());
+        noteForm.setMarket(this.getMarket());
+        noteForm.setOutsideNumber(this.getOutsideNumber());
+        noteForm.setDescription(this.getDescription());
+        noteForm.setStatus(this.getStatus());
+        noteForm.setYear(this.getData().getYear());
+        noteForm.setMonth(this.getData().getMonthValue());
+        noteForm.setDay(this.getData().getDayOfMonth());
+        noteForm.setUsers(this.getUsers());
+        return noteForm;
     }
 }

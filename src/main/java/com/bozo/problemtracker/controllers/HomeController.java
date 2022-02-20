@@ -2,12 +2,14 @@ package com.bozo.problemtracker.controllers;
 
 import com.bozo.problemtracker.enums.NoteStatus;
 import com.bozo.problemtracker.forms.NoteForm;
+import com.bozo.problemtracker.models.NotePresentation;
 import com.bozo.problemtracker.services.MarketService;
 import com.bozo.problemtracker.services.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +37,21 @@ public class HomeController {
         model.addAttribute("marketNameList", marketService.getMarketNames());
         model.addAttribute("statusList", statusList);
         return "home.html";
+    }
+
+    @GetMapping(path = "/editNote")
+    public String getEditNote(Model model
+            , @RequestParam("noteId") long noteId
+    ){
+        NotePresentation noteForPresentationById = noteService.getNoteForPresentationById(noteId);
+
+        model.addAttribute("NoteForm", noteForPresentationById.convertToNoteForm());
+        model.addAttribute("marketNameList", marketService.getMarketNames());
+        model.addAttribute("statusList", statusList);
+        System.out.println("note id " + noteId);
+        System.out.println("noteForPresentationById.id = " + noteForPresentationById.getId());
+        System.out.println("noteForPresentationById.outsideNumber = " + noteForPresentationById.getOutsideNumber());
+        return "editNote.html";
     }
 
 //    @PostMapping(path = "/addnote")

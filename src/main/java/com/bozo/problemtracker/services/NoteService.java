@@ -6,6 +6,7 @@ import com.bozo.problemtracker.forms.NoteForm;
 import com.bozo.problemtracker.models.NotePresentation;
 import com.bozo.problemtracker.repositories.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -34,6 +35,10 @@ public class NoteService {
         return Collections.unmodifiableList(noteRepository.getNotesForPresentationByUserId(id));
     }
 
+    public NotePresentation getNoteForPresentationById(long id){
+        return noteRepository.getNoteForPresentationById(id);
+    }
+
     public void addNote(NoteForm noteForm){
         Note note = new Note(
                 marketService.getMarketByName(noteForm.getMarket()),
@@ -46,7 +51,7 @@ public class NoteService {
         noteRepository.save(note);
     }
 
-    public void updateNote(NoteForm noteForm){
+    public void updateNote(NoteForm noteForm, long id){
         Note note = new Note(
                 marketService.getMarketByName(noteForm.getMarket()),
                 noteForm.getOutsideNumber(),
@@ -55,6 +60,7 @@ public class NoteService {
                 LocalDate.now(),
                 usersService.getUsersById(1)
         );
+        note.setId(id);
         noteRepository.save(note);
     }
 

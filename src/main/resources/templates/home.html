@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Problem Tracker</title>
+    <script src="/test.js"></script>
 </head>
 <body>
 <div style="float:right;">users name</div>
@@ -16,6 +17,7 @@
                 <br>
 <!--                <input id="marketid" type="text" th:field="*{market}">-->
                 <select  th:name="market">
+                    <option selected></option>
                     <option th:each="marketName : ${marketNameList}">[[${marketName}]]</option>
                 </select>
             </div>
@@ -75,12 +77,42 @@
                 <td>[[${note.getStatus()}]]</td>
                 <td>[[${note.getData().toString()}]]</td>
                 <td>[[${note.getCount()}]]</td>
-                <td><button>Edit</button></td>
+                <td><button th:onclick="openEdit([[${note.getId()}]])">Edit</button></td>
             </tr>
         </table>
     </div>
+    <div>
+        <dialog id="editDialog">
+            <iframe id="editIframe" th:src="@{/editNote(noteId=0)}"></iframe>
+            <button type="button" th:onclick="closeEdit()">Close without changes</button>
+        </dialog>
+    </div>
 </div>
+<dialog id="dialog1">
+    <p>Greetings, one and all!</p>
+    <button id="closetestbutton" value="cancel" onclick="closeTestButton()">close</button>
+</dialog>
+<button id="testbutton" onclick="testButton()">dddd</button>
 <script>
+
+    var url = "http://localhost:8080/"
+
+    function openEdit(noteId){
+        document.getElementById('editIframe').src = url + "editNote" + "?noteId=" + noteId;
+        document.getElementById('editDialog').showModal();
+    }
+
+
+
+
+    function testButton(){
+        document.getElementById('dialog1').showModal();
+    }
+
+    function closeTestButton(){
+        document.getElementById('dialog1').close();
+    }
+
     function add(){
         alert("start");
         var xhr = new XMLHttpRequest();
