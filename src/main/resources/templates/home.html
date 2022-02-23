@@ -84,7 +84,7 @@
     <div>
         <dialog id="editDialog">
             <iframe id="editIframe" th:src="@{/editNote(noteId=0)}"></iframe>
-            <button type="button" th:onclick="closeEdit()">Close without changes</button>
+            <button type="button" th:onclick="closeEdit()">Close</button>
         </dialog>
     </div>
 </div>
@@ -93,6 +93,8 @@
     <button id="closetestbutton" value="cancel" onclick="closeTestButton()">close</button>
 </dialog>
 <button id="testbutton" onclick="testButton()">dddd</button>
+<br>
+<button id="rebut" onclick="reloadButton()">reload</button>
 <script>
 
     var url = "http://localhost:8080/"
@@ -102,8 +104,30 @@
         document.getElementById('editDialog').showModal();
     }
 
+    function closeEdit(){
+        document.getElementById('editDialog').close();
+        console.log("eeee");
+
+        alert("ddd");
 
 
+
+        location.reload();
+
+
+
+        console.log("ffff");
+
+    }
+
+    function reloadButton(){
+        alert("click");
+        location.reload();
+    }
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
     function testButton(){
         document.getElementById('dialog1').showModal();

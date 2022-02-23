@@ -35,6 +35,16 @@ public class Note {
         this.users = users;
     }
 
+    public Note(long id, Market market, String outsideNumber, String description, String status, LocalDate data, Users users) {
+        this.id = id;
+        this.market = market;
+        this.outsideNumber = outsideNumber;
+        this.description = description;
+        this.status = status;
+        this.data = data;
+        this.users = users;
+    }
+
     public long getId() {
         return id;
     }

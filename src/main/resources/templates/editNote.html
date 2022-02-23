@@ -7,7 +7,11 @@
 </head>
 <body>
 <div>
-    <form action="#"  th:object="${NoteForm}" method="post">
+    <form action="#" th:action="@{/editnote}" th:object="${NoteForm}" method="post">
+        <div style="display: none;">
+            <label>ID</label>
+            <input id="noteid" type="text" th:field="*{id}">
+        </div>
         <div style="display: inline-block;">
             <label>Market</label>
             <br>
@@ -51,11 +55,15 @@
             <input id="usersid" type="text" th:field="*{users}">
         </div>
         <button type="submit">Save changes</button>
-        <button type="button" th:onclick="closeEdit()">Close without changes</button>
+<!--     zaciąga dane z bazy zanim zrobi updata    -->
+<!--        <button type="submit" th:onclick="closeDialogIframe()">Save changes</button>-->
+        <button type="button" th:onclick="closeDialogIframe()">Close</button>
     </form>
 </div>
 <script>
-
+    function closeDialogIframe(){
+        parent.closeEdit();
+    }
 </script>
 </body>
 </html>

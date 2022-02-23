@@ -51,8 +51,9 @@ public class NoteService {
         noteRepository.save(note);
     }
 
-    public void updateNote(NoteForm noteForm, long id){
+    public void updateNote(NoteForm noteForm){
         Note note = new Note(
+                noteForm.getId(),
                 marketService.getMarketByName(noteForm.getMarket()),
                 noteForm.getOutsideNumber(),
                 noteForm.getDescription(),
@@ -60,7 +61,7 @@ public class NoteService {
                 LocalDate.now(),
                 usersService.getUsersById(1)
         );
-        note.setId(id);
+//        note.setId(id);
         noteRepository.save(note);
     }
 

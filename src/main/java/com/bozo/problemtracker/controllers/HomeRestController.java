@@ -90,5 +90,32 @@ public class HomeRestController {
         return new RedirectView("/");
     }
 
+    @PostMapping(path = "/editnote")
+//    public RedirectView editNote(
+    public void editNote(
+            @RequestParam("id") long id,
+            @RequestParam("market") String market,
+            @RequestParam("outsideNumber") String outsideNumber,
+            @RequestParam("description") String description,
+            @RequestParam("status") String status,
+            @RequestParam("year") int year,
+            @RequestParam("month") int month,
+            @RequestParam("day") int day,
+            @RequestParam("users") String users
+    ){
+        NoteForm noteForm = new NoteForm();
+        noteForm.setId(id);
+        noteForm.setMarket(market);
+        noteForm.setOutsideNumber(outsideNumber);
+        noteForm.setDescription(description);
+        noteForm.setStatus(status);
+        noteForm.setYear(year);
+        noteForm.setMonth(month);
+        noteForm.setDay(day);
+
+        noteService.updateNote(noteForm);
+
+//        return new RedirectView("/");
+    }
 
 }

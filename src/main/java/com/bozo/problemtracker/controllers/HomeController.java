@@ -23,6 +23,8 @@ public class HomeController {
 
     private List<String> statusList;
 
+    private int loadCount = 0;
+
     @Autowired
     public HomeController(NoteService noteService, MarketService marketService){
         this.noteService = noteService;
@@ -36,6 +38,8 @@ public class HomeController {
         model.addAttribute("noteList", noteService.getNotesForPresentationByUserId(1));
         model.addAttribute("marketNameList", marketService.getMarketNames());
         model.addAttribute("statusList", statusList);
+        loadCount++;
+        System.out.println("main page load = " + loadCount);
         return "home.html";
     }
 
@@ -43,6 +47,9 @@ public class HomeController {
     public String getEditNote(Model model
             , @RequestParam("noteId") long noteId
     ){
+        if (noteId == 0L){
+            return "";
+        }
         NotePresentation noteForPresentationById = noteService.getNoteForPresentationById(noteId);
 
         model.addAttribute("NoteForm", noteForPresentationById.convertToNoteForm());
