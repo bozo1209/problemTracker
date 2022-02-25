@@ -5,6 +5,7 @@ import com.bozo.problemtracker.forms.NoteForm;
 import com.bozo.problemtracker.models.NotePresentation;
 import com.bozo.problemtracker.services.MarketService;
 import com.bozo.problemtracker.services.NoteService;
+import com.bozo.problemtracker.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,21 +21,24 @@ public class HomeController {
 
     private NoteService noteService;
     private MarketService marketService;
+    private UsersService usersService;
 
     private List<String> statusList;
 
     private int loadCount = 0;
 
     @Autowired
-    public HomeController(NoteService noteService, MarketService marketService){
+    public HomeController(NoteService noteService, MarketService marketService, UsersService usersService){
         this.noteService = noteService;
         this.marketService = marketService;
+        this.usersService = usersService;
         statusList = Arrays.asList(NoteStatus.OPEN.name(), NoteStatus.READY.name(), NoteStatus.CLOSED.name(), NoteStatus.REOPEN.name());
     }
 
     @GetMapping(path = "/")
     public String getHome(Model model){
         model.addAttribute("NoteForm", new NoteForm());
+        model.addAttribute("user", usersService.getUsersById(1));
         model.addAttribute("noteList", noteService.getNotesForPresentationByUserId(1));
         model.addAttribute("marketNameList", marketService.getMarketNames());
         model.addAttribute("statusList", statusList);

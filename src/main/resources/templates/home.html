@@ -6,7 +6,13 @@
     <script src="/test.js"></script>
 </head>
 <body>
-<div style="float:right;">users name</div>
+<div class="dropdown" style="float:right;">
+    <button class="dropbtn">[[${user.getName()}]]</button>
+    <div class="dropdown-content">
+        <p>[[${user.getUserRole()}]]</p>
+        <a href="#">logout</a>
+    </div>
+</div>
 <br>
 <div>
     <div>
@@ -106,17 +112,8 @@
 
     function closeEdit(){
         document.getElementById('editDialog').close();
-        console.log("eeee");
-
-        alert("ddd");
-
-
 
         location.reload();
-
-
-
-        console.log("ffff");
 
     }
 
@@ -160,5 +157,21 @@ function sleep(ms) {
         alert("udało sie?");
     }
 </script>
+<style>
+    .dropbtn{
+
+    }
+    .dropdown{
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-content{
+        display: none;
+        background-color: grey;
+    }
+    .dropdown:hover .dropdown-content{
+        display: block;
+    }
+</style>
 </body>
 </html>
