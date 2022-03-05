@@ -52,7 +52,7 @@ public class HomeController {
             , @RequestParam("noteId") long noteId
     ){
         if (noteId == 0L){
-            return "";
+            return "empty.html";
         }
         NotePresentation noteForPresentationById = noteService.getNoteForPresentationById(noteId);
 
