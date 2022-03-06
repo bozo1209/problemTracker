@@ -8,10 +8,11 @@ insert into market values(3, 'fr', 1)
 insert into market values(4, 'ro', 2)
 insert into market values(5, 'br', 3)
 
-insert into users values(1, 'one', 'pass', 'LEADER_POSTER')
-insert into users values(2, 'two', 'pass', 'POSTER')
-insert into users values(3, 'three', 'pass', 'LEADER_RECEIVER')
-insert into users values(4, 'four', 'pass', 'RECEIVER')
+--password = pass
+insert into users values(1, 'one', '$2a$10$.UO2SqcArkRv6DfH4P5xyelNVa5uY4mMf9A0qEcZoixDDnbdn9VJW', 'LEADER_POSTER')
+insert into users values(2, 'two', '$2a$10$.UO2SqcArkRv6DfH4P5xyelNVa5uY4mMf9A0qEcZoixDDnbdn9VJW', 'POSTER')
+insert into users values(3, 'three', '$2a$10$.UO2SqcArkRv6DfH4P5xyelNVa5uY4mMf9A0qEcZoixDDnbdn9VJW', 'LEADER_RECEIVER')
+insert into users values(4, 'four', '$2a$10$.UO2SqcArkRv6DfH4P5xyelNVa5uY4mMf9A0qEcZoixDDnbdn9VJW', 'RECEIVER')
 
 --insert into note values(1, '2021-12-21', 'issue', 'aa11', 'open', 1, 1)
 --insert into note values(2, '2021-12-21', 'issue', 'aa11', 'open', 2, 2)
