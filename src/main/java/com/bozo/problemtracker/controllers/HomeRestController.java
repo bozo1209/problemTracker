@@ -2,9 +2,11 @@ package com.bozo.problemtracker.controllers;
 
 import com.bozo.problemtracker.forms.NoteForm;
 import com.bozo.problemtracker.models.NotePresentation;
+import com.bozo.problemtracker.security.ApplicationUser;
 import com.bozo.problemtracker.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
@@ -69,7 +71,7 @@ public class HomeRestController {
             @RequestParam("year") int year,
             @RequestParam("month") int month,
             @RequestParam("day") int day,
-            @RequestParam("users") String users,
+//            @RequestParam("users") String users,
             Model model
 //            @RequestParam("NoteForm") NoteForm noteForm
             ){
@@ -83,6 +85,7 @@ public class HomeRestController {
         noteForm.setYear(year);
         noteForm.setMonth(month);
         noteForm.setDay(day);
+//        noteForm.setUsers(SecurityContextHolder.getContext().getAuthentication().getName());
 
         noteService.addNote(noteForm);
 
@@ -102,8 +105,8 @@ public class HomeRestController {
             @RequestParam("status") String status,
             @RequestParam("year") int year,
             @RequestParam("month") int month,
-            @RequestParam("day") int day,
-            @RequestParam("users") String users
+            @RequestParam("day") int day
+//            @RequestParam("users") String users
     ){
         NoteForm noteForm = new NoteForm();
         noteForm.setId(id);

@@ -18,4 +18,8 @@ public class UsersService {
     public Users getUsersById(long id){
         return usersRepository.findById(id);
     }
+
+    public Users getUsersByName(String name){
+        return usersRepository.findByName(name);
+    }
 }

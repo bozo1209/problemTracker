@@ -1,6 +1,7 @@
 package com.bozo.problemtracker.repositories;
 
 import com.bozo.problemtracker.entities.Note;
+import com.bozo.problemtracker.entities.Users;
 import com.bozo.problemtracker.models.NotePresentation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,5 +32,6 @@ public interface NoteRepository extends JpaRepository<Note, Long> {
             "WHERE n.id = :id")
     NotePresentation getNoteForPresentationById(@Param("id") long id);
 
-
+    @Query("SELECT u FROM Note n JOIN Users u ON n.users.id = u.id WHERE n.id = :id")
+    Users getUsersByNoteId(@Param("id") long id);
 }

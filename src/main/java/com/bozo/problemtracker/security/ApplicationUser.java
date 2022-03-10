@@ -18,6 +18,9 @@ public class ApplicationUser implements UserDetails {
         this.users = users;
     }
 
+    public Users getUsers() {
+        return users;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

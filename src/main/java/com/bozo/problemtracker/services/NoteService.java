@@ -5,8 +5,10 @@ import com.bozo.problemtracker.entities.Users;
 import com.bozo.problemtracker.forms.NoteForm;
 import com.bozo.problemtracker.models.NotePresentation;
 import com.bozo.problemtracker.repositories.NoteRepository;
+import com.bozo.problemtracker.security.ApplicationUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -46,7 +48,8 @@ public class NoteService {
                 noteForm.getDescription(),
                 noteForm.getStatus(),
                 LocalDate.now(),
-                usersService.getUsersById(1)
+//                usersService.getUsersById(1)
+                ((ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsers()
         );
         noteRepository.save(note);
     }
@@ -59,7 +62,7 @@ public class NoteService {
                 noteForm.getDescription(),
                 noteForm.getStatus(),
                 LocalDate.now(),
-                usersService.getUsersById(1)
+                noteRepository.getUsersByNoteId(noteForm.getId())
         );
 //        note.setId(id);
         noteRepository.save(note);

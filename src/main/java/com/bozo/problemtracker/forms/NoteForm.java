@@ -1,6 +1,7 @@
 package com.bozo.problemtracker.forms;
 
 import com.bozo.problemtracker.entities.Market;
+import com.bozo.problemtracker.entities.Users;
 
 public class NoteForm {
 
@@ -13,6 +14,7 @@ public class NoteForm {
     private int month;
     private int day;
     private String users;
+//    private Users users;
 
     public long getId() {
         return id;
@@ -86,6 +88,14 @@ public class NoteForm {
         this.users = users;
     }
 
+//    public Users getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Users users) {
+//        this.users = users;
+//    }
+
     @Override
     public String toString() {
         return "NoteForm{" +
@@ -97,7 +107,7 @@ public class NoteForm {
                 ", year=" + year +
                 ", month=" + month +
                 ", day=" + day +
-                ", users='" + users + '\'' +
+//                ", users='" + users + '\'' +
                 '}';
     }
 }
