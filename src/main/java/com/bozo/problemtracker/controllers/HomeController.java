@@ -2,6 +2,7 @@ package com.bozo.problemtracker.controllers;
 
 import com.bozo.problemtracker.entities.Users;
 import com.bozo.problemtracker.enums.NoteStatus;
+import com.bozo.problemtracker.enums.UserRoles;
 import com.bozo.problemtracker.forms.NoteForm;
 import com.bozo.problemtracker.models.NotePresentation;
 import com.bozo.problemtracker.security.ApplicationUser;
@@ -9,6 +10,7 @@ import com.bozo.problemtracker.services.MarketService;
 import com.bozo.problemtracker.services.NoteService;
 import com.bozo.problemtracker.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,7 @@ public class HomeController {
     }
 
     @GetMapping(path = "/")
+//    @PreAuthorize("hasRole('ROLE_POSTER')")
     public String getHome(Model model, Principal principal) {
         System.out.println("principal.getName() = " + principal.getName());
         System.out.println("SecurityContextHolder.getContext().getAuthentication().getName() = " + SecurityContextHolder.getContext().getAuthentication().getName());
@@ -53,7 +56,7 @@ public class HomeController {
         model.addAttribute("user", applicationUser);
 //        model.addAttribute("user", ((ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsers());
 //        model.addAttribute("noteList", noteService.getNotesForPresentationByUserId(1));
-        model.addAttribute("noteList", noteService.getNotesForPresentationByUserId(applicationUser.getId()));
+        model.addAttribute("noteList", noteService.getNotesForPresentationByUserIdWithoutClosed(applicationUser.getId()));
         model.addAttribute("marketNameList", marketService.getMarketNames());
         model.addAttribute("statusList", statusList);
         loadCount++;

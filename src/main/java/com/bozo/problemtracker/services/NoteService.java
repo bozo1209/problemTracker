@@ -2,6 +2,7 @@ package com.bozo.problemtracker.services;
 
 import com.bozo.problemtracker.entities.Note;
 import com.bozo.problemtracker.entities.Users;
+import com.bozo.problemtracker.enums.NoteStatus;
 import com.bozo.problemtracker.forms.NoteForm;
 import com.bozo.problemtracker.models.NotePresentation;
 import com.bozo.problemtracker.repositories.NoteRepository;
@@ -37,6 +38,10 @@ public class NoteService {
         return Collections.unmodifiableList(noteRepository.getNotesForPresentationByUserId(id));
     }
 
+    public List<NotePresentation> getNotesForPresentationByUserIdWithoutClosed(long id){
+        return Collections.unmodifiableList(noteRepository.getNotesForPresentationByUserIdWithoutClosed(id));
+    }
+
     public NotePresentation getNoteForPresentationById(long id){
         return noteRepository.getNoteForPresentationById(id);
     }
@@ -46,7 +51,7 @@ public class NoteService {
                 marketService.getMarketByName(noteForm.getMarket()),
                 noteForm.getOutsideNumber(),
                 noteForm.getDescription(),
-                noteForm.getStatus(),
+                NoteStatus.valueOf(noteForm.getStatus()),
                 LocalDate.now(),
 //                usersService.getUsersById(1)
                 ((ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsers()
@@ -60,7 +65,7 @@ public class NoteService {
                 marketService.getMarketByName(noteForm.getMarket()),
                 noteForm.getOutsideNumber(),
                 noteForm.getDescription(),
-                noteForm.getStatus(),
+                NoteStatus.valueOf(noteForm.getStatus()),
                 LocalDate.now(),
                 noteRepository.getUsersByNoteId(noteForm.getId())
         );

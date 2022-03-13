@@ -2,6 +2,7 @@ package com.bozo.problemtracker.models;
 
 import com.bozo.problemtracker.entities.Market;
 import com.bozo.problemtracker.entities.Users;
+import com.bozo.problemtracker.enums.NoteStatus;
 import com.bozo.problemtracker.forms.NoteForm;
 
 import java.time.LocalDate;
@@ -12,12 +13,13 @@ public class NotePresentation {
     private String market;
     private String outsideNumber;
     private String description;
-    private String status;
+//    private String status;
+    private NoteStatus status;
     private LocalDate data;
     private String users;
     private Long count;
 
-    public NotePresentation(long id, String market, String outsideNumber, String description, String status, LocalDate data, String users, Long count) {
+    public NotePresentation(long id, String market, String outsideNumber, String description, NoteStatus status, LocalDate data, String users, Long count) {
         this.id = id;
         this.market = market;
         this.outsideNumber = outsideNumber;
@@ -62,11 +64,11 @@ public class NotePresentation {
         this.description = description;
     }
 
-    public String getStatus() {
+    public NoteStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(NoteStatus status) {
         this.status = status;
     }
 
@@ -100,7 +102,7 @@ public class NotePresentation {
         noteForm.setMarket(this.getMarket());
         noteForm.setOutsideNumber(this.getOutsideNumber());
         noteForm.setDescription(this.getDescription());
-        noteForm.setStatus(this.getStatus());
+        noteForm.setStatus(this.getStatus().name());
         noteForm.setYear(this.getData().getYear());
         noteForm.setMonth(this.getData().getMonthValue());
         noteForm.setDay(this.getData().getDayOfMonth());

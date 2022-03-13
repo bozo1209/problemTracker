@@ -1,5 +1,7 @@
 package com.bozo.problemtracker.entities;
 
+import com.bozo.problemtracker.enums.UserRoles;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,12 +14,13 @@ public class Users {
     private String name;
     @Column(nullable = false)
     private String password;
-    private String userRole;
+    @Enumerated(EnumType.STRING)
+    private UserRoles userRole;
 
     public Users() {
     }
 
-    public Users(String name, String password, String userRole) {
+    public Users(String name, String password, UserRoles userRole) {
         this.name = name;
         this.password = password;
         this.userRole = userRole;
@@ -47,11 +50,11 @@ public class Users {
         this.password = password;
     }
 
-    public String getUserRole() {
+    public UserRoles getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(String userRole) {
+    public void setUserRole(UserRoles userRole) {
         this.userRole = userRole;
     }
 

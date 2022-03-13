@@ -17,8 +17,9 @@ public class Note {
     private Market market;
     private String outsideNumber;
     private String description;
-    private String status;
-//    private NoteStatus status;
+//    private String status;
+    @Enumerated(EnumType.STRING)
+    private NoteStatus status;
     private LocalDate data;
     @ManyToOne
     private Users users;
@@ -26,7 +27,7 @@ public class Note {
     public Note() {
     }
 
-    public Note(long id, Market market, String outsideNumber, String description, String status, LocalDate data) {
+    public Note(long id, Market market, String outsideNumber, String description, NoteStatus status, LocalDate data) {
         this.market = market;
         this.outsideNumber = outsideNumber;
         this.description = description;
@@ -34,7 +35,7 @@ public class Note {
         this.data = data;
     }
 
-    public Note(Market market, String outsideNumber, String description, String status, LocalDate data, Users users) {
+    public Note(Market market, String outsideNumber, String description, NoteStatus status, LocalDate data, Users users) {
         this.market = market;
         this.outsideNumber = outsideNumber;
         this.description = description;
@@ -43,7 +44,7 @@ public class Note {
         this.users = users;
     }
 
-    public Note(long id, Market market, String outsideNumber, String description, String status, LocalDate data, Users users) {
+    public Note(long id, Market market, String outsideNumber, String description, NoteStatus status, LocalDate data, Users users) {
         this.id = id;
         this.market = market;
         this.outsideNumber = outsideNumber;
@@ -85,11 +86,11 @@ public class Note {
         this.description = description;
     }
 
-    public String getStatus() {
+    public NoteStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(NoteStatus status) {
         this.status = status;
     }
 
